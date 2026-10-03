@@ -1,0 +1,113 @@
+/* Контейнер для всех оверлеев (плашек) поверх всего сайта */
+#overlays-layer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none; /* Чтобы не блокировать клики по меню */
+    z-index: 1000;
+    overflow: hidden;
+}
+
+/* Сама плашка */
+.social-popup {
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 15px 30px 15px 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    will-change: transform, opacity;
+}
+
+/* Левая неоновая полоса (цвет задается динамически через JS) */
+.social-popup::before {
+    content: '';
+    position: absolute;
+    top: -1px; left: -1px; bottom: -1px;
+    width: 4px;
+    background: var(--popup-accent, var(--neon-green));
+    border-radius: 8px 0 0 8px;
+    box-shadow: 0 0 15px var(--popup-accent, var(--neon-green));
+}
+
+/* Квадрат с иконкой */
+.sp-icon-wrapper {
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--popup-accent, var(--neon-green));
+}
+
+.sp-icon-wrapper svg {
+    width: 28px;
+    height: 28px;
+}
+
+/* Текстовый блок */
+.sp-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.sp-label {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.9rem;
+    color: var(--popup-accent, var(--neon-green));
+    letter-spacing: 2px;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Мигающая точка */
+.sp-dot {
+    width: 6px; height: 6px;
+    background: currentColor;
+    border-radius: 50%;
+    box-shadow: 0 0 8px currentColor;
+    animation: sp-blink 1.5s infinite;
+}
+
+@keyframes sp-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+.sp-handle {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    color: #fff;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* =========================================
+   АНИМАЦИИ ВЫЕЗДА / УЕЗДА
+   ========================================= */
+@keyframes popup-enter {
+    0% { transform: translateX(-150%) skewX(-15deg); opacity: 0; }
+    70% { transform: translateX(5%) skewX(5deg); opacity: 1; }
+    100% { transform: translateX(0) skewX(0); opacity: 1; }
+}
+
+@keyframes popup-exit {
+    0% { transform: translateX(0) skewX(0); opacity: 1; }
+    30% { transform: translateX(5%) skewX(5deg); opacity: 1; }
+    100% { transform: translateX(-150%) skewX(-15deg); opacity: 0; }
+}
+
+.sp-anim-enter { animation: popup-enter 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+.sp-anim-exit { animation: popup-exit 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }

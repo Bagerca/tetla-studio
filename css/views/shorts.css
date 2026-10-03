@@ -1,0 +1,118 @@
+.shorts-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Вертикальный холст 9:16 */
+.shorts-canvas {
+    height: 96vh;
+    aspect-ratio: 9 / 16;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(2px); /* Легкий блюр для глубины */
+}
+
+/* В режиме хромакея убираем фон, чтобы остался ТОЛЬКО HUD */
+body.chroma-mode .shorts-canvas {
+    background: transparent;
+    backdrop-filter: none;
+    box-shadow: none;
+    border: none;
+}
+
+/* ================================
+   ДЕКОРАТИВНЫЕ УГЛЫ (4 ШТУКИ)
+   ================================ */
+.hud-corner {
+    position: absolute;
+    width: 60px; height: 60px;
+    background: transparent;
+    pointer-events: none;
+}
+
+.hud-corner.top-left {
+    top: 20px; left: 20px;
+    border-top: 3px solid var(--neon-pink);
+    border-left: 3px solid var(--neon-pink);
+    filter: drop-shadow(0 0 8px var(--neon-pink));
+}
+
+.hud-corner.bottom-right {
+    bottom: 20px; right: 20px;
+    border-bottom: 3px solid var(--neon-pink);
+    border-right: 3px solid var(--neon-pink);
+    filter: drop-shadow(0 0 8px var(--neon-pink));
+}
+
+.hud-corner.top-right {
+    top: 20px; right: 20px;
+    border-top: 3px solid var(--neon-green);
+    border-right: 3px solid var(--neon-green);
+    filter: drop-shadow(0 0 8px var(--neon-green));
+}
+
+.hud-corner.bottom-left {
+    bottom: 20px; left: 20px;
+    border-bottom: 3px solid var(--neon-green);
+    border-left: 3px solid var(--neon-green);
+    filter: drop-shadow(0 0 8px var(--neon-green));
+}
+
+/* Дополнительные засечки на углах */
+.hud-corner::after {
+    content: ''; position: absolute;
+    background: currentColor;
+}
+.hud-corner.top-left::after { width: 15px; height: 3px; top: -3px; right: -25px; color: var(--neon-pink); }
+.hud-corner.bottom-right::after { width: 15px; height: 3px; bottom: -3px; left: -25px; color: var(--neon-pink); }
+
+/* ================================
+   ВЕРХНЯЯ ПАНЕЛЬ (REC)
+   ================================ */
+.hud-top {
+    position: absolute;
+    top: 35px; left: 40px; right: 40px;
+    display: flex;
+    align-items: center;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+}
+
+.hud-rec {
+    color: var(--neon-pink);
+    font-size: 1.2rem;
+    letter-spacing: 3px;
+    display: flex; align-items: center; gap: 10px;
+    text-shadow: 0 0 10px var(--neon-pink);
+}
+.hud-rec .dot {
+    width: 12px; height: 12px;
+    background: var(--neon-pink);
+    border-radius: 50%;
+    box-shadow: 0 0 15px var(--neon-pink);
+    animation: rec-blink 1s ease-in-out infinite;
+}
+@keyframes rec-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
+
+/* ================================
+   БОКОВЫЕ ШКАЛЫ (RULERS)
+   ================================ */
+.hud-side-bar {
+    position: absolute;
+    top: 50%; transform: translateY(-50%);
+    height: 300px; width: 10px;
+    border-left: 2px solid rgba(255, 255, 255, 0.2);
+}
+.hud-side-bar.left { left: 30px; }
+.hud-side-bar.right { right: 30px; border-left: none; border-right: 2px solid rgba(255, 255, 255, 0.2); }
+
+.hud-side-bar::before {
+    content: ''; position: absolute; top: 50%; left: -5px; width: 10px; height: 2px;
+    background: var(--neon-pink); box-shadow: 0 0 10px var(--neon-pink);
+}

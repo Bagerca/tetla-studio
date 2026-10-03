@@ -1,0 +1,218 @@
+.outro-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Строгий холст 1920x1080 для идеального совпадения */
+.outro-canvas {
+    width: 1920px;
+    height: 1080px;
+    position: relative;
+    max-width: 100vw;
+    max-height: 56.25vw; /* Держим 16:9 на мелких экранах */
+    transform-origin: center;
+}
+
+/* =========================================
+   РАМКИ ДЛЯ ВИДЕО (Увеличены до 670x377)
+   ========================================= */
+.outro-box {
+    position: absolute;
+    top: 350px; /* Идеальное центрирование по высоте */
+    width: 670px;
+    height: 377px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(5px);
+    border-radius: 8px;
+}
+
+/* Левая рамка (Розовая) */
+.box-left {
+    left: 70px;
+    border-left: 4px solid var(--neon-pink);
+    box-shadow: -10px 0 30px rgba(255, 45, 149, 0.2);
+}
+
+/* Правая рамка (Зеленая) */
+.box-right {
+    left: 1180px; /* 1920 - 70 - 670 */
+    border-right: 4px solid var(--neon-green);
+    box-shadow: 10px 0 30px rgba(57, 255, 20, 0.2);
+}
+
+/* Декоративные уголки рамок */
+.outro-box::before, .outro-box::after {
+    content: '';
+    position: absolute;
+    width: 40px; height: 40px;
+    background: transparent;
+    pointer-events: none;
+}
+
+.box-left::before {
+    top: -2px; left: -4px;
+    border-top: 4px solid var(--neon-pink);
+    border-left: 4px solid var(--neon-pink);
+    border-radius: 8px 0 0 0;
+    filter: drop-shadow(0 0 8px var(--neon-pink));
+}
+
+.box-left::after {
+    bottom: -2px; right: -2px;
+    border-bottom: 2px solid var(--neon-pink);
+    border-right: 2px solid var(--neon-pink);
+    border-radius: 0 0 8px 0;
+}
+
+.box-right::before {
+    top: -2px; right: -4px;
+    border-top: 4px solid var(--neon-green);
+    border-right: 4px solid var(--neon-green);
+    border-radius: 0 8px 0 0;
+    filter: drop-shadow(0 0 8px var(--neon-green));
+}
+
+.box-right::after {
+    bottom: -2px; left: -2px;
+    border-bottom: 2px solid var(--neon-green);
+    border-left: 2px solid var(--neon-green);
+    border-radius: 0 0 0 8px;
+}
+
+/* =========================================
+   ЯРЛЫКИ НАД РАМКАМИ (HUD Text)
+   ========================================= */
+.box-label {
+    position: absolute;
+    top: -35px;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.box-left .box-label {
+    left: 0;
+    color: var(--neon-pink);
+}
+
+.box-right .box-label {
+    right: 0;
+    color: var(--neon-green);
+    flex-direction: row-reverse;
+}
+
+.label-dot {
+    width: 8px; height: 8px;
+    background: currentColor;
+    border-radius: 50%;
+    box-shadow: 0 0 10px currentColor;
+    animation: blink-fast 2s infinite;
+}
+
+@keyframes blink-fast {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* =========================================
+   ЦЕНТРАЛЬНАЯ КНОПКА ПОДПИСКИ
+   ========================================= */
+.outro-sub-circle {
+    position: absolute;
+    top: 538px; /* Центр по высоте ровно посередине окон */
+    left: 960px; /* Идеальный центр по X */
+    width: 300px;
+    height: 300px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 2px dashed rgba(255, 255, 255, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Вращающиеся кольца вокруг аватарки */
+.sub-ring-1, .sub-ring-2 {
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid transparent;
+}
+
+.sub-ring-1 {
+    width: 320px; height: 320px;
+    border-top-color: var(--neon-green);
+    border-bottom-color: var(--neon-green);
+    animation: spin-right 8s linear infinite;
+    filter: drop-shadow(0 0 5px var(--neon-green));
+}
+
+.sub-ring-2 {
+    width: 340px; height: 340px;
+    border-left-color: var(--neon-pink);
+    border-right-color: var(--neon-pink);
+    animation: spin-left 12s linear infinite;
+    filter: drop-shadow(0 0 5px var(--neon-pink));
+}
+
+@keyframes spin-right { 100% { transform: rotate(360deg); } }
+@keyframes spin-left { 100% { transform: rotate(-360deg); } }
+
+/* Стрелочка и текст подписки (Опущены ниже) */
+.sub-hint {
+    position: absolute;
+    bottom: -110px; /* Опустили значительно ниже рамок */
+    text-align: center;
+    width: 100%;
+    color: #fff;
+    font-family: 'Exo 2', sans-serif;
+    font-weight: 700;
+    letter-spacing: 2px;
+    animation: float-up-down 2s ease-in-out infinite;
+}
+
+.sub-hint i {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1.5rem;
+    color: var(--neon-green);
+}
+
+@keyframes float-up-down {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+/* =========================================
+   НИЖНИЙ КОЛОНТИТУЛ
+   ========================================= */
+.outro-footer {
+    position: absolute;
+    bottom: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    opacity: 0.5;
+}
+
+.footer-line {
+    height: 2px;
+    width: 300px;
+    background: linear-gradient(90deg, transparent, #fff, transparent);
+}
+
+.footer-text {
+    font-family: 'monospace';
+    color: #fff;
+    letter-spacing: 5px;
+}

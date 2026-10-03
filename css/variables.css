@@ -1,0 +1,13 @@
+:root {
+    /* Цвета */
+    --neon-green: #39ff14;
+    --neon-pink: #ff2d95;
+    --dark-bg: #050508;
+    --card-bg: rgba(10, 11, 16, 0.85);
+    --text-main: #ffffff;
+    --text-muted: #888888;
+    
+    /* Z-Index */
+    --z-bg: 0;
+    --z-app: 10;
+}

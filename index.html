@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TETLA_OS // STUDIO HUB</title>
+    
+    <!-- Шрифты и Иконки -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;500;700&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    
+    <!-- Базовые стили -->
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Стили представлений (Views) -->
+    <link rel="stylesheet" href="css/views/hub.css">
+    <link rel="stylesheet" href="css/views/disclaimer.css">
+    <link rel="stylesheet" href="css/views/outro.css">
+    <link rel="stylesheet" href="css/views/shorts.css">
+
+    <!-- Стили Компонентов -->
+    <link rel="stylesheet" href="css/components/social-popup.css">
+</head>
+<body>
+    <!-- Фоновый космос -->
+    <div id="comet-system"></div>
+
+    <!-- Контейнер для рендера страниц -->
+    <div id="app"></div>
+
+    <!-- Глобальный слой для всплывающих уведомлений / плашек -->
+    <div id="overlays-layer"></div>
+
+    <!-- Точка входа -->
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>
